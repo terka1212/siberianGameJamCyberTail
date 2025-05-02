@@ -10,7 +10,8 @@ namespace Game.Inventory
 
         public Vector2 GetFrontPoint()
         {
-            if(Physics.Raycast(transform.position + Vector3.back, Vector3.down, out RaycastHit hit))
+            //11 - navigation layer
+            if(Physics.Raycast(transform.position + Vector3.back, Vector3.down, out RaycastHit hit, 10f, 11))
                 return hit.point;
             return transform.position;
         }

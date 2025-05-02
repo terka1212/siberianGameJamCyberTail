@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Dialogues.NPC;
 using Game.Inventory;
 using Game.Scripts;
 using UnityEngine;
@@ -15,13 +16,16 @@ namespace Game.Navigation
         [SerializeField] private LayerMask m_NavMeshLayerMask;
         [SerializeField] private LayerMask m_UILayerMask;
         [SerializeField] private LayerMask m_PickableLayerMask;
+        [SerializeField] private LayerMask m_NPCLayerMask;
         [SerializeField] private float m_maxRaycastDistance;
         [SerializeField] private float m_maxUIRaycastDistance;
         private NavMeshAgent m_Agent;
         private RaycastHit m_HitInfo = new RaycastHit();
         
         private bool CoroutineIsRunningPUII = false;
+        private bool CoroutineIsRunningTTN = false;
         private PickableItemView cachedPickableItem = null;
+        private NPC cachedNPC = null;
         void Start()
         {
             m_Agent = GetComponent<NavMeshAgent>();
@@ -47,6 +51,13 @@ namespace Game.Navigation
                     return;
                 }
                 
+                //If Ray hits NPCObject
+                if(Physics.Raycast(ray, out m_HitInfo, m_maxRaycastDistance,m_NPCLayerMask))
+                {
+                    HandleNPCObjectHit(m_HitInfo.collider.GetComponent<NPC>());
+                    return;
+                }
+                
                 //If Ray hits navmesh
                 if (Physics.Raycast(ray.origin, ray.direction, out m_HitInfo, m_maxRaycastDistance, m_NavMeshLayerMask))
                 {
@@ -61,7 +72,7 @@ namespace Game.Navigation
         {
             if (item == null)
             {
-                Debug.Log("Item is null");
+                Debug.Log("PickableItem is null");
                 return;
             }
             if (CoroutineIsRunningPUII)
@@ -73,6 +84,42 @@ namespace Game.Navigation
             cachedPickableItem = item;
             StartCoroutine(PickUpInInventory(item));
             Debug.Log("Hit Pickable");
+        }
+        
+        private void HandleNPCObjectHit(NPC npc)
+        {
+            if (npc == null)
+            {
+                Debug.Log("NPC is null");
+                return;
+            }
+            if (CoroutineIsRunningPUII)
+            {
+                Debug.Log("Stop Coroutine");
+                return;
+            }
+            m_Agent.destination = npc.GetFrontPoint();
+            cachedNPC = npc;
+            StartCoroutine(TalkToNPC(npc));
+            Debug.Log("Hit NPC");
+        }
+
+        private IEnumerator TalkToNPC(NPC npc)
+        {
+            CoroutineIsRunningTTN = true;
+            while (!NavMeshAgentCheckForCompletion())
+            {
+                if (cachedPickableItem is null)
+                {
+                    CoroutineIsRunningPUII = false;
+                    yield break;
+                }
+                yield return null;
+            }
+
+            Debug.Log("Talk to NPC");
+            npc.Interact();
+            CoroutineIsRunningTTN = false;
         }
 
         private IEnumerator PickUpInInventory(PickableItemView item)
