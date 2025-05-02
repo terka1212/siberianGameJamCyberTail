@@ -8,19 +8,19 @@ namespace Game.UI
     {
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private float _duration;
-        [SerializeField] private float _showYPos;
-        [SerializeField] private float _hideYPos;
+        [SerializeField] private float _showXPos;
+        [SerializeField] private float _hideXPos;
         
         private bool _isShow;
 
         private void OnHide()
         {
-            _rectTransform.DOMoveY(_hideYPos, _duration).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _rectTransform.DOMoveX(_hideXPos, _duration).SetEase(Ease.InOutQuad).SetUpdate(true);
         }
 
         private void OnShow()
         {
-            _rectTransform.DOMoveY(_showYPos, _duration).SetEase(Ease.InOutQuad).SetUpdate(true);
+            _rectTransform.DOMoveX(_showXPos, _duration).SetEase(Ease.InOutQuad).SetUpdate(true);
         }
 
         public void OnClick()

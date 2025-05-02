@@ -29,7 +29,7 @@ namespace Game.Navigation
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp)
+            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog)
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
