@@ -2,13 +2,17 @@ using UnityEngine;
 
 namespace Game.Utils
 {
-    
     public class CoroutineHandler : MonoBehaviour
     {
+        public static CoroutineHandler instance;
+
         private void Awake()
         {
-            DontDestroyOnLoad(this);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this);
+            }
         }
-
     }
 }

@@ -5,25 +5,31 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-    [RequireComponent(typeof(Image))]
     public class Fade : MonoBehaviour
     {
-        private Image image;
+        [SerializeField] private Image image;
+        
+        public static Fade instance;
 
         private const float duration = 0.5f;
         private void Awake()
         {
-            image = GetComponent<Image>();
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this);
+            }
         }
 
-        public IEnumerator FadeIn()
+        public static IEnumerator FadeIn()
         {
-            yield return image.DOFade(1f, duration).WaitForCompletion();
+            yield return instance.image.DOFade(1f, duration).WaitForCompletion();
         }
         
-        public IEnumerator FadeOut()
+        public static IEnumerator FadeOut()
         {
-            yield return image.DOFade(0f, duration).WaitForCompletion();
+            yield return instance.image.DOFade(0f, duration).WaitForCompletion();
         }
+
     }
 }

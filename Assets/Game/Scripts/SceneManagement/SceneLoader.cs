@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Events;
 using Game.UI;
 using Game.Utils;
 using UnityEngine;
@@ -8,9 +9,12 @@ namespace Game.SceneManagement
 {
     public static class SceneLoader
     {
-        public static IEnumerator LoadScene(CoroutineHandler coroutineHandler, Fade screenFade, SceneName sceneName)
+        public static bool isSceneLoading = false;
+        public static IEnumerator LoadScene(SceneName sceneName)
         {
-            //yield return coroutineHandler.StartCoroutine(screenFade.FadeIn());
+            isSceneLoading = true;
+            EventManager.InvokeStartSceneLoading();
+            yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeIn());
             
             var scene = SceneManager.LoadSceneAsync(sceneName.ToString());
             if (scene is not null)
@@ -28,6 +32,8 @@ namespace Game.SceneManagement
                 yield return null;
             } while (scene.progress < 0.9f);
             scene.allowSceneActivation = true;
+            isSceneLoading = false;
+            yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeOut());
         }
     }
     

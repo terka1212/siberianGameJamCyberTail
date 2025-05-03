@@ -7,8 +7,6 @@ namespace Game.SceneManagement
     public class NextSceneButton : MonoBehaviour
     {
         [SerializeField] private SceneName nextSceneName;
-        [SerializeField] private Fade fadeScreen;
-        [SerializeField] private CoroutineHandler _coroutineHandler;
         private bool isSceneLoading;
         
         private void Awake()
@@ -20,7 +18,7 @@ namespace Game.SceneManagement
         {
             if (isSceneLoading) return;
             
-            StartCoroutine(SceneLoader.LoadScene(_coroutineHandler, fadeScreen, nextSceneName));
+            StartCoroutine(SceneLoader.LoadScene(nextSceneName));
             isSceneLoading = true;
         }
     }

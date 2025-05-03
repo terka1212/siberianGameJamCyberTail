@@ -1,10 +1,11 @@
 using System.Collections;
 using Game.Dialogues.NPC;
+using Game.Events;
 using Game.Inventory;
+using Game.SceneManagement;
 using Game.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Game.Navigation
 {
@@ -32,11 +33,12 @@ namespace Game.Navigation
         void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
+            EventManager.StartSceneLoading += HandleStartSceneLoading;
         }
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog)
+            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog && !SceneLoader.isSceneLoading)
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
@@ -72,6 +74,12 @@ namespace Game.Navigation
                     Debug.Log("Hit navmesh");
                 }
             }
+        }
+
+        private void HandleStartSceneLoading()
+        {
+            _cachedNPC = null;
+            _cachedPickableItem = null;
         }
 
         private void HandlePickableObjectHit(PickableItemView item)
@@ -163,6 +171,11 @@ namespace Game.Navigation
                 }
             }
             return false;
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.StartSceneLoading-= HandleStartSceneLoading;
         }
     }
 }
