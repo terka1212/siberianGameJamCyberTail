@@ -890,20 +890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5cca874217a9c438d4bd9bbf1de8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NavMeshLayerMask:
+  navMeshLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  m_UILayerMask:
+  UILayerMask:
     serializedVersion: 2
     m_Bits: 32
-  m_PickableLayerMask:
+  pickableLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  m_NPCLayerMask:
+  NPCLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  m_maxRaycastDistance: 100
-  m_maxUIRaycastDistance: 5
+    m_Bits: 8192
+  maxRaycastDistance: 30
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1498,7 @@ Transform:
   m_GameObject: {fileID: 799191665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 180.50143, y: 624.4566, z: -36.154606}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1779,9 +1778,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Some shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some
-    shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some
-    shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some shit!
+  m_text: 'Some shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some
+    shit! Some shit! Some shit! Some shit! Some shit! Some shit! Some shit! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1816,7 +1814,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2877,6 +2875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9763e0a9ef4bc7b399b889d095fb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipDialoguesArea: {fileID: 2008005782}
   NPCNameText: {fileID: 2068667482}
   NPCDialogueText: {fileID: 869357597}
   NPCAvatarImage: {fileID: 1246281414}
@@ -3316,7 +3315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2627451}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3489,7 +3488,7 @@ GameObject:
   - component: {fileID: 2027961355}
   - component: {fileID: 2027961358}
   - component: {fileID: 2027961357}
-  - component: {fileID: 2027961356}
+  - component: {fileID: 2027961359}
   m_Layer: 13
   m_Name: TestNPC
   m_TagString: NPC
@@ -3506,26 +3505,12 @@ Transform:
   m_GameObject: {fileID: 2027961354}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -180.31, y: -626.85, z: 32.14}
+  m_LocalPosition: {x: 1.632, y: -1.92, z: -2.66}
   m_LocalScale: {x: 0.42999998, y: 0.42999998, z: 0.42999998}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 799191666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2027961356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027961354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72dfefa68b845bbb550067c00f627f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemID: 0
-  isBlocked: 0
 --- !u!65 &2027961357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3602,6 +3587,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2027961359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027961354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96b004e271a4fafac63d9de9e7b8362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  dialogues:
+  - {fileID: 11400000, guid: e624c81153a4a844994388cdc150cc30, type: 2}
+  dialogueController: {fileID: 1756175494}
+  skipDialoguesArea: {fileID: 2008005782}
 --- !u!1 &2044781488
 GameObject:
   m_ObjectHideFlags: 0

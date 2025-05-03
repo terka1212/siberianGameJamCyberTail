@@ -1,34 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using System.Collections.Generic;
 
 namespace Game.Dialogues.NPC
 {
-    public class NPCProgressTracker : MonoBehaviour
+    public static class NPCProgressTracker
     {
-        [SerializeField] private SerializedDictionary<NPC, List<DialogueText>> dialogues;
-        
-        private static NPCProgressTracker _instance;
-
-        private void Awake()
-        {
-            if (_instance == null)
-            {
-                _instance = this;
-                DontDestroyOnLoad(this);
-            }
-        }
+        private static Dictionary<NPC, List<DialogueText>> dialogues = new Dictionary<NPC, List<DialogueText>>();
 
         public static void InitDialogue(NPC npc, List<DialogueText> dialogueTexts)
         {
-            _instance.dialogues[npc] = dialogueTexts;
+            dialogues[npc] = dialogueTexts;
         }
 
         public static DialogueText GetDialogue(NPC npc)
         {
             var progress = ProgressStorage.GetProgress(npc.id);
-            return _instance.dialogues[npc][progress];
+            return dialogues[npc][progress];
         }
     }
 }

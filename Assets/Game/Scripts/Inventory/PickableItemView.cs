@@ -8,12 +8,18 @@ namespace Game.Inventory
         
         [SerializeField] public bool isBlocked = false;
 
-        public Vector2 GetFrontPoint()
+        public Vector3 GetFrontPoint(LayerMask mask)
         {
             //11 - navigation layer
-            if(Physics.Raycast(transform.position + Vector3.back, Vector3.down, out RaycastHit hit, 10f, 11))
+            if (Physics.Raycast(transform.position + Vector3.back, Vector3.up, out RaycastHit hit, 30f, mask))
+            {
+                Debug.Log("Hit point: " + hit.point);
                 return hit.point;
-            return transform.position;
+            }
+            
+            Debug.Log("No hit point");
+
+            return transform.position + Vector3.back;
         }
     }
 }

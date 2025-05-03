@@ -88,7 +88,7 @@ namespace Game.Dialogues
 
         private void EndConversation()
         {
-            conversationEnded = true;
+            conversationEnded = false;
 
             if (gameObject.activeSelf)
             {
@@ -101,19 +101,17 @@ namespace Game.Dialogues
         private IEnumerator TypeDialogueText(string text)
         {
             isTyping = true;
+            int maxVisibleChars = 0;
 
-            NPCDialogueText.text = "";
+            NPCDialogueText.text = text;
+            NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
 
-            string originalText = text;
-            string displayedText = "";
-            int alphaIndex = 0;
-            foreach (var c in text.ToCharArray())
+            foreach (char c in text.ToCharArray())
             {
-                alphaIndex++;
-                NPCDialogueText.text = originalText;
-                displayedText = NPCDialogueText.text.Insert(alphaIndex, HTML_ALPHA);
-                NPCDialogueText.text = displayedText;
-                yield return typeDialogueCachedWait;
+                maxVisibleChars++;
+                NPCDialogueText.maxVisibleCharacters = maxVisibleChars;
+
+                yield return new WaitForSeconds(MAX_TYPE_TIME / typeSpeed);
             }
 
             isTyping = false;
@@ -123,7 +121,7 @@ namespace Game.Dialogues
         {
             StopCoroutine(typeDialogueCoroutine);
 
-            NPCDialogueText.text = paragraph.text;
+            NPCDialogueText.maxVisibleCharacters = paragraph.text.Length;
 
             isTyping = false;
         }

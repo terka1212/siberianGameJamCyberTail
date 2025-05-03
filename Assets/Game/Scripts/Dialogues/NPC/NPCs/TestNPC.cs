@@ -28,6 +28,7 @@ namespace Game.Dialogues.NPC
         {
             InitDialogueArea(dialogueText);
             dialogueController.DisplayNextParagraph(dialogueText);
+            Debug.Log("Talking");
         }
     }
 }

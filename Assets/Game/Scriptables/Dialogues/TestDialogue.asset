@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: TestDialogue
   m_EditorClassIdentifier: 
   paragraphs:
-  - speakerName: Test npc
+  - SpeakerSprite: {fileID: -3093366854362000331, guid: ba61dda26977a224bb9042099bb53117, type: 3}
+    speakerName: Test npc
     text: "\u042F \u043C\u043E\u0433\u0443 \u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C!
       \u0419\u041E\u041E\u041E\u041E\u041E\u0423\u0423\u0423!"
-  - speakerName: Test npc
+  - SpeakerSprite: {fileID: -3093366854362000331, guid: ba61dda26977a224bb9042099bb53117, type: 3}
+    speakerName: Test npc
     text: "\u041F\u043E\u0447\u0435\u043C\u0443? \u0417\u0430\u0447\u0435\u043C?
       \u041A\u043E\u0433\u043E? \u0427\u0435\u0433\u043E? \u0417\u0430 \u0447\u0442\u043E?
       \u0414\u043B\u044F \u0447\u0435\u0433\u043E? \u041A\u043E\u043C\u0443? \u041A\u043E\u0433\u043E?

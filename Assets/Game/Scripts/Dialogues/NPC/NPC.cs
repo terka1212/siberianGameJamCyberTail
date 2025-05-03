@@ -17,12 +17,15 @@ namespace Game.Dialogues.NPC
             ProgressStorage.SetProgress(id, 0);
         }
         
-        public Vector2 GetFrontPoint()
+        public Vector3 GetFrontPoint(LayerMask mask)
         {
             //11 - navigation layer
-            if(Physics.Raycast(transform.position + Vector3.back, Vector3.down, out RaycastHit hit, 10f, 11))
+            if (Physics.Raycast(transform.position + Vector3.back, Vector3.down, out RaycastHit hit, 30f, mask))
+            {
                 return hit.point;
-            return transform.position;
+            }
+
+            return transform.position + Vector3.back;
         }
     }
 }
