@@ -13,7 +13,7 @@ namespace Game.Dialogues.NPC
 
         public void Initialize()
         {
-            NPCProgressTracker.InitDialogue(this, dialogues);
+            NPCProgressTracker.InitDialogue(id, dialogues);
             ProgressStorage.SetProgress(id, 0);
         }
         

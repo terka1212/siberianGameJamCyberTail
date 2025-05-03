@@ -4,16 +4,19 @@ namespace Game.Dialogues.NPC
 {
     public static class NPCProgressTracker
     {
-        private static Dictionary<NPC, List<DialogueText>> dialogues = new Dictionary<NPC, List<DialogueText>>();
+        private static Dictionary<int, List<DialogueText>> dialogues = new Dictionary<int, List<DialogueText>>();
 
-        public static void InitDialogue(NPC npc, List<DialogueText> dialogueTexts)
+        private static bool isInitialized = false;
+        public static void InitDialogue(int npc, List<DialogueText> dialogueTexts)
         {
+            if(isInitialized) return;
             dialogues[npc] = dialogueTexts;
+            isInitialized = true;
         }
 
-        public static DialogueText GetDialogue(NPC npc)
+        public static DialogueText GetDialogue(int npc)
         {
-            var progress = ProgressStorage.GetProgress(npc.id);
+            var progress = ProgressStorage.GetProgress(npc);
             return dialogues[npc][progress];
         }
     }

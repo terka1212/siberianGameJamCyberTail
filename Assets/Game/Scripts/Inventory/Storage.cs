@@ -17,6 +17,12 @@ namespace Game.Inventory
                 items[i] = null;
             }
         }
+
+        public static bool isSlotNotEmpty(int slot)
+        {
+            return items.ContainsKey(slot) && items[slot] != null;
+        }
+        
         public static Item GetItemByPosition(int position)
         {
             return items[position];

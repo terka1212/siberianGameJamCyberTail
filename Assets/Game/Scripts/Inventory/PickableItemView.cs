@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Inventory
 {
@@ -6,7 +7,13 @@ namespace Game.Inventory
     {
         [SerializeField] public int itemID;
         
-        [SerializeField] public bool isBlocked = false;
+        private void Awake()
+        {
+            if (AllItems.isItemInInventory(itemID))
+            {
+                Destroy(gameObject);
+            }
+        }
 
         public Vector3 GetFrontPoint(LayerMask mask)
         {

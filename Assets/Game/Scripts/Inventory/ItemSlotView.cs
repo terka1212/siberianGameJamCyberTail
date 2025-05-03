@@ -16,6 +16,8 @@ namespace Game.Inventory
         private void Awake()
         {
             _image = GetComponent<Image>();
+            if(Storage.isSlotNotEmpty(slotNumber))
+                OnInventoryChange();
         }
         private void Start()
         {

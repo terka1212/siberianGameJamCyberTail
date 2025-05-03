@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,8 +11,22 @@ namespace Game.UI
         [SerializeField] private float _duration;
         [SerializeField] private float _showXPos;
         [SerializeField] private float _hideXPos;
-        
-        private bool _isShow;
+
+        private static bool _isShow;
+
+        private void Start()
+        {
+            if (_isShow)
+            {
+                _rectTransform.transform.position = new Vector3(_showXPos, _rectTransform.transform.position.y,
+                    _rectTransform.transform.position.z);
+            }
+            else
+            {
+                _rectTransform.transform.position = new Vector3(_hideXPos, _rectTransform.transform.position.y,
+                    _rectTransform.transform.position.z);
+            }
+        }
 
         private void OnHide()
         {
@@ -35,7 +50,6 @@ namespace Game.UI
                 _isShow = true;
                 OnShow();
             }
-            
         }
     }
 }

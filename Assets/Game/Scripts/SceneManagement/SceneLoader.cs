@@ -1,4 +1,6 @@
 using System.Collections;
+using Game.UI;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +8,10 @@ namespace Game.SceneManagement
 {
     public static class SceneLoader
     {
-        public static IEnumerator LoadScene(SceneName sceneName) {
+        public static IEnumerator LoadScene(CoroutineHandler coroutineHandler, Fade screenFade, SceneName sceneName)
+        {
+            //yield return coroutineHandler.StartCoroutine(screenFade.FadeIn());
+            
             var scene = SceneManager.LoadSceneAsync(sceneName.ToString());
             if (scene is not null)
             {
@@ -28,7 +33,7 @@ namespace Game.SceneManagement
     
     public enum SceneName
     {
-        Game,
-        Results
+        SampleScene,
+        SampleScene2
     }
 }

@@ -15,7 +15,7 @@ namespace Game.Dialogues.NPC
 
         public override void Interact()
         {
-            var dialogueText = NPCProgressTracker.GetDialogue(this);
+            var dialogueText = NPCProgressTracker.GetDialogue(id);
             Talk(dialogueText);
         }
 

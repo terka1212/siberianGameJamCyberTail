@@ -6,7 +6,7 @@ namespace Game.Inventory
     public class ItemInfo : ScriptableObject
     {
         [SerializeField] public int id;
-        [SerializeField] public string name;
+        [SerializeField] public string Nname;
         [SerializeField] public Sprite icon;
     }
 }

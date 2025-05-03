@@ -19,7 +19,7 @@ namespace Game.Dialogues.NPC
 
         public static void SetProgress(int npcId, int progressInt)
         {
-            progress.Add(npcId, progressInt);
+            progress.TryAdd(npcId, progressInt);
         }
     }
 }

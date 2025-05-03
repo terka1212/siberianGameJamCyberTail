@@ -23,5 +23,11 @@ namespace Game.Inventory
         {
             return instance.items.Find(x => id == x.ItemInfo.id);
         }
+
+        public static bool isItemInInventory(int id)
+        {
+            var item = GetItemById(id);
+            return item is not null && item.InInventory;
+        }
     }
 }

@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef3470d4e649239fd12f2bdfefa902, type: 3}
   m_Name: NPC_FDJKJFDKJ_DIALOGUE1
   m_EditorClassIdentifier: 
-  paragraphs: []
+  paragraphs:
+  - SpeakerSprite: {fileID: 0}
+    speakerName: 
+    text: 
+  - SpeakerSprite: {fileID: 0}
+    speakerName: 
+    text: 
