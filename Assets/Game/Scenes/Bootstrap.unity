@@ -253,7 +253,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1033,6 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - ItemInfo: {fileID: 11400000, guid: 11fb0aa33a559874dbcf81aa61f978b8, type: 2}
+  - ItemInfo: {fileID: 11400000, guid: ec2a9c6cc95b94042b5c3d2cb27dc68f, type: 2}
 --- !u!4 &1865744003
 Transform:
   m_ObjectHideFlags: 0

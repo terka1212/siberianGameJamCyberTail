@@ -9,7 +9,7 @@ namespace Game.Dialogues.NPC
         private static bool isInitialized = false;
         public static void InitDialogue(int npc, List<DialogueText> dialogueTexts)
         {
-            if(isInitialized) return;
+            if(dialogues.ContainsKey(npc)) return;
             dialogues[npc] = dialogueTexts;
             isInitialized = true;
         }

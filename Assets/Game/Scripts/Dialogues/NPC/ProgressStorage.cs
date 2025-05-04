@@ -6,6 +6,8 @@ namespace Game.Dialogues.NPC
     {
         //npcID, progressInt
         private static Dictionary<int, int> progress = new Dictionary<int, int>();
+        
+        public static ElectricPanel electricPanelState = ElectricPanel.Closed;
 
         public static int GetProgress(int npcId)
         {
@@ -21,5 +23,14 @@ namespace Game.Dialogues.NPC
         {
             progress.TryAdd(npcId, progressInt);
         }
+    }
+
+    public enum ElectricPanel
+    {
+        Closed,
+        OpenAndTurnOn,
+        OpenAndTurnOff,
+        OpenAndTurnOnAndBulbOff,
+        OpenAndTurnOffAndBulbOff
     }
 }

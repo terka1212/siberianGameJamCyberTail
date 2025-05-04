@@ -1,9 +1,10 @@
-﻿using Game.UI;
+﻿using Game.Inventory;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Dialogues.NPC
 {
-    public class TableNPC : NPC, ITalkable
+    public class Bulb : NPC, ITalkable
     {
         [SerializeField] private DialogueController dialogueController;
         [SerializeField] private SkipDialoguesArea skipDialoguesArea;
@@ -21,9 +22,9 @@ namespace Game.Dialogues.NPC
 
         public override void Interact()
         {
-            if (ProgressStorage.GetProgress(id) == 2)
+            if (ProgressStorage.GetProgress(id) == 1)
             {
-                backgroundController.ChangeSpriteWithFade(repairedTable);
+                Storage.AddItemById(3);
                 ProgressStorage.IncrementProgress(id);
             }
             else
