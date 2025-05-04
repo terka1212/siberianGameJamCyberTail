@@ -8,16 +8,10 @@ namespace Game.Dialogues.NPC
     {
         [SerializeField] private DialogueController dialogueController;
         [SerializeField] private SkipDialoguesArea skipDialoguesArea;
-        [SerializeField] private BackgroundController backgroundController;
-        [SerializeField] private Sprite repairedTable;
         [SerializeField] private Vector3 comingPlayerDirection;
         private void Awake()
         {
             Initialize();
-            if (ProgressStorage.GetProgress(id) > 2)
-            {
-                backgroundController.ChangeSpriteWithoutFade(repairedTable);
-            }
         }
 
         public override void Interact()

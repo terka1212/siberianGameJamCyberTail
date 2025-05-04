@@ -1243,16 +1243,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f217cb0d06403dbadee0eda10cadb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 20
   initProgress: 0
   dialogues:
-  - {fileID: 11400000, guid: e624c81153a4a844994388cdc150cc30, type: 2}
+  - {fileID: 11400000, guid: 4482c72b348bcf841bf1dac191b40ce5, type: 2}
   - {fileID: 11400000, guid: 028e318f2ec7bc9439129096ad301c5b, type: 2}
   - {fileID: 11400000, guid: 68c368e13abd7cd499776b8fd611da4f, type: 2}
   - {fileID: 11400000, guid: 2d03abc2234695a4e9abd86e6ca21d05, type: 2}
   dialogueController: {fileID: 280042951}
   skipDialoguesArea: {fileID: 280042952}
-  NeedItemId: 0
+  NeedItemId: 18
   backgroundController: {fileID: 1696539088}
   plug: {fileID: -3093366854362000331, guid: ba61dda26977a224bb9042099bb53117, type: 3}
   comingPlayerDirection: {x: 0, y: 0, z: -1}

@@ -936,13 +936,13 @@ MonoBehaviour:
   id: 0
   initProgress: 0
   dialogues:
-  - {fileID: 11400000, guid: e624c81153a4a844994388cdc150cc30, type: 2}
+  - {fileID: 11400000, guid: 799a4ddd3e9ec004f86de485f58fcbb5, type: 2}
   - {fileID: 11400000, guid: 028e318f2ec7bc9439129096ad301c5b, type: 2}
-  - {fileID: 11400000, guid: 68c368e13abd7cd499776b8fd611da4f, type: 2}
+  - {fileID: 11400000, guid: 8ab4b53af07945a48b34a687f4b57f69, type: 2}
   - {fileID: 11400000, guid: 2d03abc2234695a4e9abd86e6ca21d05, type: 2}
   dialogueController: {fileID: 1234689032}
   skipDialoguesArea: {fileID: 1234689033}
-  NeedItemId: 0
+  NeedItemId: 17
   backgroundController: {fileID: 1245663651}
   withHatSprite: {fileID: -1818294053, guid: 68219be5a00a8c54f8680254785f293c, type: 3}
   comingPlayerDirection: {x: 0, y: 0, z: -1}

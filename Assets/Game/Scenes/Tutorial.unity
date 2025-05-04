@@ -925,7 +925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1056307147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1015,6 +1015,7 @@ Transform:
   - {fileID: 672680973}
   - {fileID: 688588487}
   - {fileID: 624245578}
+  - {fileID: 1484531107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194839393
@@ -1122,6 +1123,81 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1484531106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484531107}
+  - component: {fileID: 1484531109}
+  - component: {fileID: 1484531108}
+  m_Layer: 13
+  m_Name: LightBulb
+  m_TagString: NPC
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484531107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484531106}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.39, y: 2.69, z: -0.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1139380129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1484531108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484531106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01046e4b0dcb419d95def17079fabf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  initProgress: 0
+  dialogues:
+  - {fileID: 11400000, guid: 2fb2066ff9273eb41b1bfeaf4e4ff24d, type: 2}
+  - {fileID: 11400000, guid: 68c368e13abd7cd499776b8fd611da4f, type: 2}
+  - {fileID: 11400000, guid: 2fb2066ff9273eb41b1bfeaf4e4ff24d, type: 2}
+  dialogueController: {fileID: 2043903895}
+  skipDialoguesArea: {fileID: 2043903894}
+  comingPlayerDirection: {x: 0, y: 0, z: -1}
+--- !u!65 &1484531109
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484531106}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.61, y: 2.49, z: 0.92}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1516808131
 GameObject:

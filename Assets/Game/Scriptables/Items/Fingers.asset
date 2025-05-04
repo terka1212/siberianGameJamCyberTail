@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796a76e796b8a1e468d115cc19ce4af7, type: 3}
+  m_Name: Fingers
+  m_EditorClassIdentifier: 
+  id: 18
+  Nname: Fingers
+  icon: {fileID: -8917630527471793445, guid: 2dd312a33718ddd43ad825f4941d9474, type: 3}

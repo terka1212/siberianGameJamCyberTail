@@ -45,6 +45,10 @@ namespace Game.UI
             {
                 var dialogueText = dialogueTexts[progressIndex];
                 Talk(dialogueText);
+                if (progressIndex == 0)
+                {
+                    AIProgressStorage.SetProgressIndex(progressIndex + 1);
+                }
             }
             else
             {

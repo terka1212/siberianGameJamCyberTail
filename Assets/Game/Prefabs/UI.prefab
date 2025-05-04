@@ -461,7 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueTexts:
-  - {fileID: 11400000, guid: e8276e0d6bf37634c8a10d54ddcc628e, type: 2}
+  - {fileID: 11400000, guid: eb1191165aa7d9447bd0825e6d87ae23, type: 2}
+  - {fileID: 11400000, guid: 3f8f48f171ca15f4dab85d8729512624, type: 2}
   dialogueController: {fileID: 3025082637664284825}
   skipDialoguesArea: {fileID: 3979708205166409095}
 --- !u!1 &1971475765458131965
