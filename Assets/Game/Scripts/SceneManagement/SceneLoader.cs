@@ -39,6 +39,9 @@ namespace Game.SceneManagement
     
     public enum SceneName
     {
+        Bootstrap,
+        Menu,
+        Tutorial,
         SampleScene,
         SampleScene2
     }

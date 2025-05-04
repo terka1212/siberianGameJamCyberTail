@@ -20,11 +20,16 @@ namespace Game.Navigation
         [SerializeField] private LayerMask pickableLayerMask;
         [SerializeField] private LayerMask NPCLayerMask;
         [SerializeField] private float maxRaycastDistance;
+        [SerializeField] private float velocityToDetect;
+        [SerializeField] private Animator _animator;
         private NavMeshAgent _agent;
         private RaycastHit _hitInfo = new RaycastHit();
 
         private Coroutine _cachedPUII;
         private Coroutine _cachedTTN;
+
+        private Direction direction = Direction.Left;
+        private float previousX;
         
         private bool _coroutineIsRunningPUII = false;
         private bool _coroutineIsRunningTTN = false;
@@ -38,6 +43,7 @@ namespace Game.Navigation
 
         void Update()
         {
+            //Handle movement, PickableObject, Npc
             if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog && !SceneLoader.isSceneLoading)
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -73,6 +79,49 @@ namespace Game.Navigation
                     _agent.destination = _hitInfo.point;
                     Debug.Log("Hit navmesh");
                 }
+            }
+            
+            //Handle animations
+            var velocity = _agent.velocity.magnitude;
+            if (velocity > velocityToDetect)
+            {
+                _animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                _animator.SetBool("IsMoving", false);
+            }
+            
+            //Change direction if prev x is different
+            var x = transform.position.x;
+            if (!Mathf.Approximately(previousX, x))
+            {
+                ChangeDirection(previousX, x);
+            }
+
+            previousX = x;
+            
+            //Handle direction
+            switch (direction)
+            {
+                case Direction.Left:
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
+                    break;
+                case Direction.Right:
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 180, transform.rotation.eulerAngles.z);
+                    break;
+            }
+        }
+
+        private void ChangeDirection(float prevVal, float val)
+        {
+            if (val > prevVal)
+            {
+                direction = Direction.Right;
+            }
+            else
+            {
+                direction = Direction.Left;
             }
         }
 
@@ -177,5 +226,11 @@ namespace Game.Navigation
         {
             EventManager.StartSceneLoading-= HandleStartSceneLoading;
         }
+    }
+
+    public enum Direction
+    {
+        Right, 
+        Left
     }
 }

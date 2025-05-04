@@ -26,6 +26,7 @@ namespace Game.Dialogues.NPC
 
         public void Talk(DialogueText dialogueText)
         {
+            if(MouseState.isInDialog) return;
             InitDialogueArea(dialogueText);
             dialogueController.DisplayNextParagraph(dialogueText);
             Debug.Log("Talking");
