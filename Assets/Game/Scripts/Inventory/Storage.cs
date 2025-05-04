@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game.Events;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ namespace Game.Inventory
             {
                 items[i] = null;
             }
+        }
+
+        public static bool isItemInSlots(Item item)
+        {
+            return items.ContainsValue(item);
         }
 
         public static bool isSlotNotEmpty(int slot)
@@ -55,15 +61,25 @@ namespace Game.Inventory
             return true;
         }
 
-        public static void RemoveItem(int position)
+        public static bool RemoveItem(Item item)
         {
-            var item = items[position];
+            if (!isItemInSlots(item)) return false;
+            int position = 0;
+            foreach (var itemPair in items)
+            {
+                if (itemPair.Value == item)
+                {
+                    position = itemPair.Key;
+                    break;
+                }
+            }
             if (item is not null)
             {
                 item.InInventory = false;
             }
             items.Remove(position);
             EventManager.InvokeInventoryChangeEvent();
+            return true;
         }
     }
 }

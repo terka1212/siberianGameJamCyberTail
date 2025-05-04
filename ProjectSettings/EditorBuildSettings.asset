@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/Tutorial.unity
     guid: 6128510234a02734bb6fdbef3f1b80bd
   - enabled: 1
+    path: Assets/Game/Scenes/Street.unity
+    guid: cd8d5b13a1217d246a74040a6d2d6798
+  - enabled: 1
+    path: Assets/Game/Scenes/Market.unity
+    guid: 52279ea72da78a64aa39ec10c008276d
+  - enabled: 1
+    path: Assets/Game/Scenes/Roof.unity
+    guid: 1bd6c5ffdef262c4ca6ea5f1252b15ad
+  - enabled: 1
     path: Assets/Game/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1

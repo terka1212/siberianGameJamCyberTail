@@ -1,5 +1,4 @@
 using System;
-using Game.Scripts;
 
 namespace Game.Inventory
 {

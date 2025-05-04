@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Dialogues;
 using Game.Dialogues.NPC;
-using Game.Scripts;
 using UnityEngine;
 
 namespace Game.UI

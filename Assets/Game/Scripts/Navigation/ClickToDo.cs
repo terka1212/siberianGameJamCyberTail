@@ -3,7 +3,6 @@ using Game.Dialogues.NPC;
 using Game.Events;
 using Game.Inventory;
 using Game.SceneManagement;
-using Game.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 

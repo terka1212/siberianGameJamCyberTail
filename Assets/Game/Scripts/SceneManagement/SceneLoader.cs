@@ -42,6 +42,9 @@ namespace Game.SceneManagement
         Bootstrap,
         Menu,
         Tutorial,
+        Street,
+        Market,
+        Roof,
         SampleScene,
         SampleScene2
     }

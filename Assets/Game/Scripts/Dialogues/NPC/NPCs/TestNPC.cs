@@ -1,5 +1,4 @@
-﻿using Game.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Dialogues.NPC
 {

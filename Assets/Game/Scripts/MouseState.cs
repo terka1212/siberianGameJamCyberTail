@@ -1,6 +1,6 @@
 ﻿using Game.Inventory;
 
-namespace Game.Scripts
+namespace Game
 {
     public class MouseState
     {

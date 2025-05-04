@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eef3470d4e649239fd12f2bdfefa902, type: 3}
-  m_Name: TestDialogue
+  m_Name: TestDialogue1
   m_EditorClassIdentifier: 
   paragraphs:
   - SpeakerSprite: {fileID: -3093366854362000331, guid: ba61dda26977a224bb9042099bb53117, type: 3}
