@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace WyzalUtilities.Data
+namespace Game.Utils
 {
     public class SerializableDictionaryConverter<TKey, TValue> : UxmlAttributeConverter<SerializableDictionary<TKey, TValue>>
 {

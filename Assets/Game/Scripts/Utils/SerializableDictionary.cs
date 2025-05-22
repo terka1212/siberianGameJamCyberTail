@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WyzalUtilities.Data
+namespace Game.Utils
 {
     [Serializable]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
@@ -10,7 +10,9 @@ namespace WyzalUtilities.Data
         public List<TKey> SerializedKeys = new List<TKey>();
         public List<TValue> SerializedValues = new List<TValue>();
 
-        public void OnBeforeSerialize() { }
+        public void OnBeforeSerialize()
+        {
+        }
 
         public void OnAfterDeserialize()
         {
@@ -46,7 +48,7 @@ namespace WyzalUtilities.Data
 
             // if the lists are out of sync then rebuild
             if (SerializedKeys.Count == SerializedValues.Count) return;
-            
+
             SerializedKeys = new(Keys);
             SerializedValues = new(Values);
         }

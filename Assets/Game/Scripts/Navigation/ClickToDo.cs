@@ -43,7 +43,7 @@ namespace Game.Navigation
         void Update()
         {
             //Handle movement, PickableObject, Npc
-            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog && !SceneLoader.isSceneLoading)
+            if (Input.GetMouseButtonDown(0) && !MouseState.isPickedUp && !MouseState.isInDialog)
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 

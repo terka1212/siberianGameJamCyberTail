@@ -1,4 +1,6 @@
-﻿using Game.SceneManagement;
+﻿using Game.Data;
+using Game.SceneManagement;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.Dialogues.NPC

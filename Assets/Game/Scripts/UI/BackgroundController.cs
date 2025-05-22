@@ -12,7 +12,7 @@ namespace Game.UI
 
         public void ChangeSpriteWithFade(Sprite sprite)
         {
-            StartCoroutine(ChangeSpriteWithFadeCoroutine(sprite));
+            //StartCoroutine(ChangeSpriteWithFadeCoroutine(sprite));
         }
         
         public void ChangeSpriteWithoutFade(Sprite sprite)
@@ -20,16 +20,16 @@ namespace Game.UI
             spriteRenderer.sprite = sprite;
         }
 
-        private IEnumerator ChangeSpriteWithFadeCoroutine(Sprite sprite)
-        {
-            SceneLoader.isSceneLoading = true;
-            EventManager.InvokeStartSceneLoading();
-            yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeIn());
-
-            spriteRenderer.sprite = sprite;
-
-            SceneLoader.isSceneLoading = false;
-            yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeOut());
-        }
+        // private IEnumerator ChangeSpriteWithFadeCoroutine(Sprite sprite)
+        // {
+        //     //SceneLoader.isSceneLoading = true;
+        //     EventManager.InvokeStartSceneLoading();
+        //     //yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeIn());
+        //
+        //     spriteRenderer.sprite = sprite;
+        //
+        //     //SceneLoader.isSceneLoading = false;
+        //     //yield return CoroutineHandler.instance.StartCoroutine(Fade.FadeOut());
+        // }
     }
 }

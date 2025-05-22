@@ -2,34 +2,37 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Game.UI
 {
     public class Fade : MonoBehaviour
     {
-        [SerializeField] private Image image;
-        
-        public static Fade instance;
+        private Image image;
 
-        private const float duration = 0.5f;
-        private void Awake()
+        private FadeSettings _fadeSettings;
+
+        [Inject]
+        public void Construct(FadeSettings fadeSettings)
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(this);
-            }
+            _fadeSettings = fadeSettings;
         }
 
-        public static IEnumerator FadeIn()
+        public void Awake()
         {
-            yield return instance.image.DOFade(1f, duration).WaitForCompletion();
-        }
-        
-        public static IEnumerator FadeOut()
-        {
-            yield return instance.image.DOFade(0f, duration).WaitForCompletion();
+            image = GetComponent<Image>();
         }
 
+        public IEnumerator FadeIn()
+        {
+            yield return image.DOFade(1f, _fadeSettings.inAndOutDuration / 2).SetEase(_fadeSettings.easeIn)
+                .WaitForCompletion();
+        }
+
+        public IEnumerator FadeOut()
+        {
+            yield return image.DOFade(0f, _fadeSettings.inAndOutDuration / 2).SetEase(_fadeSettings.easeOut)
+                .WaitForCompletion();
+        }
     }
 }
