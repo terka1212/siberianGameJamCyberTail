@@ -1,4 +1,5 @@
 ﻿using Game.Data;
+using Game.Dialogues.NPC;
 using Game.Events;
 using Game.Navigation;
 using Game.SceneManagement;
@@ -10,12 +11,18 @@ using VContainer.Unity;
 
 namespace Game.Infrastructure.Scopes
 {
-    public class RootLifeTimeScope : LifetimeScope
+    public class RootLifetimeScope : LifetimeScope
     {
-        [SerializeField] private GlobalUICanvas _globalUICanvas;
+        [Header("UI Settings")] [SerializeField]
+        private GlobalUICanvas _globalUICanvas;
+
         [SerializeField] private Fade _fade;
         [SerializeField] private FadeSettings _fadeSettings;
 
+        [Header("Point and Click Settings")] [SerializeField]
+        private bool _isPointAndClickBlockedOnStart = true;
+
+        [SerializeField] private float _maxRaycastDistance;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -25,6 +32,7 @@ namespace Game.Infrastructure.Scopes
             BindFadeSystem(builder, globalUI);
             BindSceneSystem(builder);
             BindPointAndClickSystem(builder);
+            BindInteractableHandlerSystem(builder);
         }
 
         private GlobalUICanvas BindGlobalUICanvas(IContainerBuilder builder)
@@ -34,7 +42,7 @@ namespace Game.Infrastructure.Scopes
             builder.RegisterComponent(globalUI);
             return globalUI;
         }
-        
+
         private void BindCoroutineHandler(IContainerBuilder builder)
         {
             builder.RegisterComponentOnNewGameObject<CoroutineHandler>(Lifetime.Singleton).DontDestroyOnLoad();
@@ -48,7 +56,7 @@ namespace Game.Infrastructure.Scopes
         private void BindFadeSystem(IContainerBuilder builder, GlobalUICanvas globalUICanvas)
         {
             builder.RegisterInstance(_fadeSettings);
-            
+
             var fade = Instantiate(_fade, globalUICanvas.transform);
             DontDestroyOnLoad(fade);
             builder.RegisterComponent(fade);
@@ -65,7 +73,18 @@ namespace Game.Infrastructure.Scopes
 
         private void BindPointAndClickSystem(IContainerBuilder builder)
         {
+            builder.RegisterEntryPoint<PlayerNavMeshAgentService>();
+            builder.Register<PointAndClickData>(Lifetime.Singleton)
+                .WithParameter(_maxRaycastDistance)
+                .WithParameter(_isPointAndClickBlockedOnStart);
             builder.Register<PointAndClickService>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<PointAndClickPresenter>();
+        }
+
+        private void BindInteractableHandlerSystem(IContainerBuilder builder)
+        {
+            builder.Register<InteractableHandlingService>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<InteractableHandlingPresenter>();
         }
     }
 }

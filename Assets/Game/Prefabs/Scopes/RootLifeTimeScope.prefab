@@ -51,3 +51,4 @@ MonoBehaviour:
   _globalUICanvas: {fileID: 7583391948440975930, guid: 76112865dbd19b245a32944b86fad3f6, type: 3}
   _fade: {fileID: 8898300567238242171, guid: 2acb616182573dd44bac742bfab54ce1, type: 3}
   _fadeSettings: {fileID: 11400000, guid: 0ed435fa83e8b2a4b86e2993ac71bd5f, type: 2}
+  _maxRaycastDistance: 15
