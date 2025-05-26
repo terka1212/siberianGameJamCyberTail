@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Data;
 
 namespace Game.Dialogues.NPC
 {

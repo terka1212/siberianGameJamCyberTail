@@ -1,4 +1,5 @@
-﻿using Game.UI;
+﻿using Game.Data;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Dialogues.NPC

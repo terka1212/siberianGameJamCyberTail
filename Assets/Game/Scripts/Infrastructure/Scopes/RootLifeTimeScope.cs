@@ -1,4 +1,5 @@
 ﻿using Game.Data;
+using Game.Dialogues;
 using Game.Dialogues.NPC;
 using Game.Events;
 using Game.Navigation;
@@ -13,16 +14,18 @@ namespace Game.Infrastructure.Scopes
 {
     public class RootLifetimeScope : LifetimeScope
     {
-        [Header("UI Settings")] [SerializeField]
-        private GlobalUICanvas _globalUICanvas;
-
+        [Header("UI Settings")]
+        [SerializeField] private GlobalUICanvas _globalUICanvas;
         [SerializeField] private Fade _fade;
         [SerializeField] private FadeSettings _fadeSettings;
 
-        [Header("Point and Click Settings")] [SerializeField]
-        private bool _isPointAndClickBlockedOnStart = true;
-
+        [Header("Point and Click Settings")] 
+        [SerializeField] private bool _isPointAndClickBlockedOnStart = true;
         [SerializeField] private float _maxRaycastDistance;
+        
+        [Header("Dialogue Settings")]
+        [SerializeField] private float _typeSpeed;
+        [SerializeField] private float _maxTypeTime;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -33,6 +36,7 @@ namespace Game.Infrastructure.Scopes
             BindSceneSystem(builder);
             BindPointAndClickSystem(builder);
             BindInteractableHandlerSystem(builder);
+            BindDialogueSystem(builder);
         }
 
         private GlobalUICanvas BindGlobalUICanvas(IContainerBuilder builder)
@@ -85,6 +89,15 @@ namespace Game.Infrastructure.Scopes
         {
             builder.Register<InteractableHandlingService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<InteractableHandlingPresenter>();
+        }
+
+        private void BindDialogueSystem(IContainerBuilder builder)
+        {
+            builder.Register<DialogueData>(Lifetime.Singleton)
+                .WithParameter(_typeSpeed)
+                .WithParameter(_maxTypeTime);
+            builder.Register<DialogueService>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<DialoguePresenter>();
         }
     }
 }

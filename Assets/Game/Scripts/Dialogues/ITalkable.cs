@@ -1,4 +1,6 @@
-﻿namespace Game.Dialogues
+﻿using Game.Data;
+
+namespace Game.Dialogues
 {
     public interface ITalkable
     {

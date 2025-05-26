@@ -25,6 +25,12 @@ namespace Game.Events
         public event Action<string> OnHandleClickValidationFailed;
         public event Action<NavMeshAgent> OnDestinationReachedByPlayer;
         public event Action OnDestinationReachedByOppositeAgent;
+        
+        //DialogueEvents
+        public event Action OnDialogueStarted;
+        public event Action OnEndDialogue;
+        public event Action<long, int> OnNPCDialogueNull;
+        public event Action<long> OnNPCNotExisted;
 
         //Scene Events Handling
         public void InvokeOnStartSceneTransition(SceneName sceneFrom, SceneName sceneTo) =>
@@ -42,5 +48,11 @@ namespace Game.Events
             OnDestinationReachedByPlayer?.Invoke(agent);
 
         public void InvokeOnDestinationReachedByOppositeAgent() => OnDestinationReachedByOppositeAgent?.Invoke();
+        
+        //Dialogue Events Handling
+        public void InvokeOnDialogueStarted() => OnDialogueStarted?.Invoke();
+        public void InvokeOnEndDialogue() => OnEndDialogue?.Invoke();
+        public void InvokeOnNPCDialogueNull(long npcId, int progress) => OnNPCDialogueNull?.Invoke(npcId, progress);
+        public void InvokeOnNPCNotExisted(long npcId) => OnNPCNotExisted?.Invoke(npcId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Data;
 using Game.Dialogues;
 using Game.Dialogues.NPC;
 using UnityEngine;

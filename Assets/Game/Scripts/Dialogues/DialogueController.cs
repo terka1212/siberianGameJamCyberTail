@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,15 +24,7 @@ namespace Game.Dialogues
 
         private Coroutine typeDialogueCoroutine;
 
-        private const string HTML_ALPHA = "<color=#00000000>";
         private const float MAX_TYPE_TIME = 0.1f;
-
-        private WaitForSeconds typeDialogueCachedWait;
-
-        private void Start()
-        {
-            typeDialogueCachedWait = new WaitForSeconds(MAX_TYPE_TIME / typeSpeed);
-        }
 
         public void DisplayNextParagraph(DialogueText dialogueText)
         {
