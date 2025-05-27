@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Audio
+namespace Game.Data
 {
     [Serializable]
     public class Sound
@@ -11,5 +11,17 @@ namespace Game.Audio
         public float volume;
 
         public AudioClip clip;
+
+        public float minPitch;
+        
+        public float maxPitch;
     }
+
+    public enum EffectSoundType
+    {
+        Effect,
+        Dialogue,
+        UI
+    }
+    
 }

@@ -1,4 +1,5 @@
-﻿using Game.Data;
+﻿using Game.Audio;
+using Game.Data;
 using Game.Dialogues;
 using Game.Dialogues.NPC;
 using Game.Events;
@@ -7,6 +8,7 @@ using Game.SceneManagement;
 using Game.UI;
 using Game.Utils;
 using UnityEngine;
+using UnityEngine.Audio;
 using VContainer;
 using VContainer.Unity;
 
@@ -26,6 +28,13 @@ namespace Game.Infrastructure.Scopes
         [Header("Dialogue Settings")]
         [SerializeField] private float _typeSpeed;
         [SerializeField] private float _maxTypeTime;
+        
+        [Header("Sound Settings")]
+        [SerializeField] private AudioContainer _audioContainer;
+        [SerializeField] private AudioMixerGroup _audioMixerGroup;
+        [SerializeField] private AudioSources _audioSources;
+        [SerializeField] private FadeSettings _audioFadeSettings;
+        
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -37,6 +46,7 @@ namespace Game.Infrastructure.Scopes
             BindPointAndClickSystem(builder);
             BindInteractableHandlerSystem(builder);
             BindDialogueSystem(builder);
+            BindAudioSystem(builder);
         }
 
         private GlobalUICanvas BindGlobalUICanvas(IContainerBuilder builder)
@@ -59,9 +69,8 @@ namespace Game.Infrastructure.Scopes
 
         private void BindFadeSystem(IContainerBuilder builder, GlobalUICanvas globalUICanvas)
         {
-            builder.RegisterInstance(_fadeSettings);
-
             var fade = Instantiate(_fade, globalUICanvas.transform);
+            fade.Init(_fadeSettings);
             DontDestroyOnLoad(fade);
             builder.RegisterComponent(fade);
 
@@ -98,6 +107,26 @@ namespace Game.Infrastructure.Scopes
                 .WithParameter(_maxTypeTime);
             builder.Register<DialogueService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<DialoguePresenter>();
+        }
+
+        private void BindAudioSystem(IContainerBuilder builder)
+        {
+            //Init and register audioContainer
+            _audioContainer.Init();
+            builder.RegisterInstance(_audioContainer);
+            
+            builder.RegisterInstance(_audioMixerGroup);
+            
+            //instantiate and register audioSources manually
+            var audioSources = Instantiate(_audioSources);
+            _audioSources.Init(_audioFadeSettings);
+            DontDestroyOnLoad(audioSources);
+            builder.RegisterComponent(audioSources);
+            
+            builder.Register<AudioService>(Lifetime.Singleton);
+            builder.Register<AudioPresenter>(Lifetime.Singleton);
+            builder.Register<AudioSettingsService>(Lifetime.Singleton);
+            builder.Register<AudioSettingsPresenter>(Lifetime.Singleton);
         }
     }
 }

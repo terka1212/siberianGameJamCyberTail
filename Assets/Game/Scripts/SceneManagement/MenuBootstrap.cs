@@ -8,13 +8,13 @@ namespace Game.SceneManagement
     {
         private void Start()
         {
-            AudioStorage.PlayGlobalMusic("bomba", new FadeSettings()
-            {
-                durationIn = 0.5f,
-                durationOut = 0.5f,
-                easeIn = Ease.InQuad,
-                easeOut = Ease.OutQuad,
-            });
+            // AudioStorage.PlayGlobalMusic("bomba", new FadeSettings()
+            // {
+            //     durationIn = 0.5f,
+            //     durationOut = 0.5f,
+            //     easeIn = Ease.InQuad,
+            //     easeOut = Ease.OutQuad,
+            // });
         }
     }
 }

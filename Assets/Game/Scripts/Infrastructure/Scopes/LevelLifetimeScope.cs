@@ -1,4 +1,5 @@
-﻿using Game.Dialogues;
+﻿using Game.Audio;
+using Game.Dialogues;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -15,6 +16,7 @@ namespace Game.Infrastructure.Scopes
         {
             BindNavMeshSystem(builder);
             BindDialogueSystem(builder);
+            BindAudioSystem(builder);
         }
 
         private void BindNavMeshSystem(IContainerBuilder builder)
@@ -28,6 +30,11 @@ namespace Game.Infrastructure.Scopes
             builder.RegisterComponentInNewPrefab(dialogueCanvas, Lifetime.Scoped)
                 .UnderTransform(uiRectTransform);
             builder.Register<DialogueView>(Lifetime.Scoped);
+        }
+
+        private void BindAudioSystem(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<AudioSettingsView>();
         }
     }
 }

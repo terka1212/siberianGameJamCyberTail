@@ -31,6 +31,11 @@ namespace Game.Events
         public event Action OnEndDialogue;
         public event Action<long, int> OnNPCDialogueNull;
         public event Action<long> OnNPCNotExisted;
+        
+        //AudioEvents
+        public event Action<string> OnEffectDontFound;
+        public event Action OnSoundTypeIsntHandle;
+        public event Action OnSoundSettingTypeIsntHandle;
 
         //Scene Events Handling
         public void InvokeOnStartSceneTransition(SceneName sceneFrom, SceneName sceneTo) =>
@@ -54,5 +59,10 @@ namespace Game.Events
         public void InvokeOnEndDialogue() => OnEndDialogue?.Invoke();
         public void InvokeOnNPCDialogueNull(long npcId, int progress) => OnNPCDialogueNull?.Invoke(npcId, progress);
         public void InvokeOnNPCNotExisted(long npcId) => OnNPCNotExisted?.Invoke(npcId);
+        
+        //Audio Events Handling
+        public void InvokeOnEffectDontFound(string msg) => OnEffectDontFound?.Invoke(msg);
+        public void InvokeOnSoundTypeIsntHandle() => OnSoundTypeIsntHandle?.Invoke();
+        public void InvokeOnSoundSettingTypeIsntHandle() => OnSoundSettingTypeIsntHandle?.Invoke();
     }
 }

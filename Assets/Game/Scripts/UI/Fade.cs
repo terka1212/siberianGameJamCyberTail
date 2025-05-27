@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using Game.Data;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -11,9 +12,8 @@ namespace Game.UI
         private Image image;
 
         private FadeSettings _fadeSettings;
-
-        [Inject]
-        public void Construct(FadeSettings fadeSettings)
+        
+        public void Init(FadeSettings fadeSettings)
         {
             _fadeSettings = fadeSettings;
         }
@@ -25,13 +25,13 @@ namespace Game.UI
 
         public IEnumerator FadeIn()
         {
-            yield return image.DOFade(1f, _fadeSettings.inAndOutDuration / 2).SetEase(_fadeSettings.easeIn)
+            yield return image.DOFade(1f, _fadeSettings.durationIn).SetEase(_fadeSettings.easeIn)
                 .WaitForCompletion();
         }
 
         public IEnumerator FadeOut()
         {
-            yield return image.DOFade(0f, _fadeSettings.inAndOutDuration / 2).SetEase(_fadeSettings.easeOut)
+            yield return image.DOFade(0f, _fadeSettings.durationOut).SetEase(_fadeSettings.easeOut)
                 .WaitForCompletion();
         }
     }

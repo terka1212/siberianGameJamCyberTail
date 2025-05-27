@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Game.Data
+﻿namespace Game.Data
 {
     public class SceneData
     {
