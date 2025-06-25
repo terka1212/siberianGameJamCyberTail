@@ -14,10 +14,10 @@ namespace Game.Data
 
         public void Init()
         {
+            if(_sounds == null || _sounds.Count > 0) 
+                _sounds = new List<Sound>();
             _sounds.AddRange(musicSounds);
             _sounds.AddRange(sfxSounds);
-            musicSounds.Clear();
-            sfxSounds.Clear();
         }
 
         public bool TryFindSound(out Sound sound, string soundName)
@@ -34,6 +34,11 @@ namespace Game.Data
         private static Sound FindSound(List<Sound> sounds, string name)
         {
             return sounds.First(sound => sound.name == name);
+        }
+
+        private void OnDestroy()
+        {
+            _sounds = null;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Game.Data;
 using Game.Dialogues;
 using Game.Dialogues.NPC;
+using Game.GameObjects;
 using UnityEngine;
 
 namespace Game.UI

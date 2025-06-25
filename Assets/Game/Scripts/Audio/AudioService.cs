@@ -103,7 +103,6 @@ namespace Game.Audio
                 .WaitForCompletion();
 
             SetAndPlayMusic(sound, false);
-
             yield return _audioSources.MusicSource.DOFade(sound.volume, fadeSettings.durationOut)
                 .SetEase(fadeSettings.easeOut)
                 .SetUpdate(true)
@@ -116,6 +115,8 @@ namespace Game.Audio
         {
             if (withVolume)
                 _audioSources.MusicSource.volume = sound.volume;
+            else 
+                _audioSources.MusicSource.volume = 0;
             _audioSources.MusicSource.clip = sound.clip;
             _audioSources.MusicSource.Play();
         }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using Game.Data;
 using Game.Events;
+using Game.GameObjects;
+using Game.UI;
 using Game.Utils;
 using VContainer;
 
@@ -8,32 +10,35 @@ namespace Game.SceneManagement
 {
     public class SceneService
     {
-        private SceneData _sceneData;
-        
-        private EventManager _eventManager;
+        private readonly FadeService _fadeService;
+        private readonly CoroutineHandler _coroutineHandler;
+        private readonly EventManager _eventManager;
+        private readonly SceneData _sceneData;
 
         [Inject]
-        public SceneService(SceneData sceneData, EventManager eventManager)
+        public SceneService(FadeService fadeService,
+            CoroutineHandler coroutineHandler, EventManager eventManager, SceneData sceneData)
         {
-            _sceneData = sceneData;
+            _fadeService = fadeService;
+            _coroutineHandler = coroutineHandler;
             _eventManager = eventManager;
-        }
-        
-        public IEnumerator LoadScene(SceneName sceneLoadTo) => SceneLoader.LoadScene(sceneLoadTo);
-
-        public void SaveLoadFromScene(SceneName sceneName)
-        {
-            _sceneData.sceneLoadedFrom = sceneName;
+            _sceneData = sceneData;
         }
 
-        public void InvokeStartSceneTransition(SceneName sceneLoadFrom, SceneName sceneLoadTo)
+        public IEnumerator SceneTransition(SceneName sceneLoadFrom, SceneName sceneLoadTo)
         {
-            _eventManager.InvokeOnStartSceneTransition(sceneLoadTo, sceneLoadFrom);
+            _eventManager.InvokeOnStartSceneTransitionEvent(sceneLoadFrom, sceneLoadTo);
+            _sceneData.sceneLoadedFrom = sceneLoadFrom;
+
+            yield return _coroutineHandler.StartCoroutine(_fadeService.Show());
+            yield return _coroutineHandler.StartCoroutine(SceneLoader.LoadScene(sceneLoadTo));
+            yield return _coroutineHandler.StartCoroutine(_fadeService.Hide());
+            _eventManager.InvokeOnEndSceneTransitionEvent(sceneLoadFrom, sceneLoadTo);
         }
-        
-        public void InvokeEndSceneTransition(SceneName sceneLoadFrom, SceneName sceneLoadTo)
+
+        public SceneName GetCurrentScene()
         {
-            _eventManager.InvokeOnEndSceneTransition(sceneLoadTo, sceneLoadFrom);
+            return SceneLoader.GetCurrentSceneName();
         }
     }
 }

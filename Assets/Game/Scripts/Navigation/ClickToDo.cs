@@ -2,11 +2,10 @@ using System.Collections;
 using Game.Dialogues.NPC;
 using Game.Events;
 using Game.Inventory;
-using Game.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Game.Navigation
+namespace Game.GameObjects
 {
     /// <summary>
     /// Use physics raycast hit from mouse click to set agent destination

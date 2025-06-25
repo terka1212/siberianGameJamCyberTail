@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Navigation
+namespace Game.GameObjects
 {
-    public class PointAndClickPresenter : IStartable, IDisposable
+    public class PointAndClickPresenter : MonoBehaviour, IDisposable
     {
         private PointAndClickService _pointAndClickService;
             
@@ -22,7 +22,7 @@ namespace Game.Navigation
         public void Start()
         {
             _clickAction = InputSystem.actions.FindAction("Click");
-            _mousePositionAction = InputSystem.actions.FindAction("MousePosition");
+            _mousePositionAction = InputSystem.actions.FindAction("CursorPosition");
             
             _clickAction.performed += ClickHandle;
         }

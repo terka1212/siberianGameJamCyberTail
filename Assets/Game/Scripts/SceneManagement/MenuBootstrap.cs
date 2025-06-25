@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-using Game.Audio;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.SceneManagement
 {

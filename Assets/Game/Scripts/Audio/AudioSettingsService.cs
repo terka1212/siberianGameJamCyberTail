@@ -31,7 +31,7 @@ namespace Game.Audio
 
         public void SetDialogueVolume(float volume)
         {
-            _audioMixerGroup.audioMixer.SetFloat("DialogueVolume",
+            _audioMixerGroup.audioMixer.SetFloat("DialoguesVolume",
                 Mathf.Lerp(MIN_MIXER_VOLUME, MAX_MIXER_VOLUME, volume));
         }
 

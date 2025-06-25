@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: DefaultAudioContainer
   m_EditorClassIdentifier: 
   musicSounds:
-  - name: bomba
+  - name: MainTheme
     volume: 1
     clip: {fileID: 8300000, guid: 2caa90432ec12514288e5abe1bdd5b9f, type: 3}
+    minPitch: 1
+    maxPitch: 1
   sfxSounds: []

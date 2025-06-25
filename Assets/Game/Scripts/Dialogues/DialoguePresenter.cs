@@ -2,13 +2,14 @@
 using Game.Data;
 using Game.Dialogues.NPC;
 using Game.Events;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 using VContainer.Unity;
 
 namespace Game.Dialogues
 {
-    public class DialoguePresenter : IStartable, IDisposable
+    public class DialoguePresenter : MonoBehaviour, IDisposable
     {
         private DialogueDistributor _dialogueDistributor;
         private DialogueService _dialogueService;

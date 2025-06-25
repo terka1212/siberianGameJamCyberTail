@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8882732898884476977}
   - component: {fileID: 4518220376862457459}
-  - component: {fileID: 6248042264096988506}
   - component: {fileID: 614117270834858795}
   m_Layer: 0
   m_Name: View
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -641872126, guid: 01dbcb97daa32cb4cbdfd78f271a9c56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -89,29 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &6248042264096988506
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2700878987183728412}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.76
-  m_Height: 4.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &614117270834858795
 Animator:
   serializedVersion: 7
@@ -144,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7781273514425570836}
   - component: {fileID: 1123112373034587647}
-  - component: {fileID: 4285320896535865515}
+  - component: {fileID: 5160458493399629215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -190,7 +166,7 @@ NavMeshAgent:
   m_BaseOffset: 0.87
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4285320896535865515
+--- !u!114 &5160458493399629215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,21 +175,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3318524863528422143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5cca874217a9c438d4bd9bbf1de8ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e2c6456badb49bcb9d3de525f5de7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshLayerMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  UILayerMask:
-    serializedVersion: 2
-    m_Bits: 32
-  pickableLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  NPCLayerMask:
-    serializedVersion: 2
-    m_Bits: 8192
-  maxRaycastDistance: 30
-  velocityToDetect: 0.01
   _animator: {fileID: 614117270834858795}
+  velocityToDetect: 0.02

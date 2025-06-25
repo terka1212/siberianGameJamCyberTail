@@ -1,23 +1,22 @@
 ﻿using System;
 using Game.Events;
+using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.Dialogues.NPC
 {
-    public class InteractableHandlingPresenter : IStartable, IDisposable
+    public class InteractableHandlingPresenter : MonoBehaviour, IDisposable
     {
         private EventManager _eventManager;
         private InteractableHandlingService _interactableHandlingService;
 
         [Inject]
-        public InteractableHandlingPresenter(InteractableHandlingService interactableHandlingService,
+        public void Construct(InteractableHandlingService interactableHandlingService,
             EventManager eventManager)
         {
             _interactableHandlingService = interactableHandlingService;
             _eventManager = eventManager;
         }
-
 
         public void Start()
         {

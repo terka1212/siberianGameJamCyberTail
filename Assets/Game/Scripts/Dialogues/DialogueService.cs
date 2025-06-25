@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Game.Data;
 using Game.Events;
-using Game.Navigation;
+using Game.GameObjects;
 using Game.Utils;
 using VContainer;
 
@@ -12,17 +12,17 @@ namespace Game.Dialogues
         private DialogueView _dialogueView;
         private DialogueData _dialogueData;
         private CoroutineHandler _coroutineHandler;
-        private PointAndClickService _pointAndClickService;
+        private PointAndClickData _pointAndClickData;
         private EventManager _eventManager;
 
         [Inject]
         public DialogueService(DialogueView dialogueView, DialogueData dialogueData, CoroutineHandler coroutineHandler,
-            PointAndClickService pointAndClickService, EventManager eventManager)
+            PointAndClickData pointAndClickData, EventManager eventManager)
         {
             _dialogueView = dialogueView;
             _dialogueData = dialogueData;
             _coroutineHandler = coroutineHandler;
-            _pointAndClickService = pointAndClickService;
+            _pointAndClickData = pointAndClickData;
             _eventManager = eventManager;
         }
 
@@ -71,7 +71,7 @@ namespace Game.Dialogues
             if (!_dialogueView.gameObject.activeSelf)
             {
                 _dialogueView.ActivateDialogueView();
-                _pointAndClickService.Block();
+                _pointAndClickData.Block();
                 _eventManager.InvokeOnDialogueStarted();
             }
 
@@ -88,7 +88,7 @@ namespace Game.Dialogues
             if (_dialogueView.gameObject.activeSelf)
             {
                 _dialogueView.DeactivateDialogueView();
-                _pointAndClickService.Unblock();
+                _pointAndClickData.Unblock();
                 _eventManager.InvokeOnEndDialogue();
             }
         }

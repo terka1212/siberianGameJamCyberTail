@@ -1,14 +1,14 @@
 ﻿using Game.Audio;
 using Game.Data;
-using Game.Dialogues;
-using Game.Dialogues.NPC;
+using Game.DebugUtilities;
 using Game.Events;
-using Game.Navigation;
 using Game.SceneManagement;
 using Game.UI;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -16,13 +16,17 @@ namespace Game.Infrastructure.Scopes
 {
     public class RootLifetimeScope : LifetimeScope
     {
+        [Header("Camera Settings")]
+        [SerializeField] private Camera _camera;
+        [SerializeField] private EventSystem _eventSystem;
+        
         [Header("UI Settings")]
         [SerializeField] private GlobalUICanvas _globalUICanvas;
         [SerializeField] private Fade _fade;
         [SerializeField] private FadeSettings _fadeSettings;
-
+        
         [Header("Point and Click Settings")] 
-        [SerializeField] private bool _isPointAndClickBlockedOnStart = true;
+        [SerializeField] private bool _isPointAndClickBlockedOnStartScene;
         [SerializeField] private float _maxRaycastDistance;
         
         [Header("Dialogue Settings")]
@@ -35,18 +39,47 @@ namespace Game.Infrastructure.Scopes
         [SerializeField] private AudioSources _audioSources;
         [SerializeField] private FadeSettings _audioFadeSettings;
         
+        [Header("Debug Settings")]
+        [SerializeField] private GameObject _levelsDebug;
+        
+        private GlobalUICanvas _globalUICanvasInstance;
+        
+        protected override void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            base.Awake();
+        }
 
         protected override void Configure(IContainerBuilder builder)
         {
-            var globalUI = BindGlobalUICanvas(builder);
+            BindCamera(builder);
+            BindEventSystem(builder);
+            _globalUICanvasInstance = BindGlobalUICanvas(builder);
             BindCoroutineHandler(builder);
             BindEventManager(builder);
-            BindFadeSystem(builder, globalUI);
+            BindFadeSystem(builder);
             BindSceneSystem(builder);
-            BindPointAndClickSystem(builder);
-            BindInteractableHandlerSystem(builder);
+            BindPointAndClickData(builder);
             BindDialogueSystem(builder);
             BindAudioSystem(builder);
+            BindScopedLifecycleManager(builder);
+            BindDebugInfo(builder);
+        }
+
+        private void BindCamera(IContainerBuilder builder)
+        {
+            var camera = Instantiate(_camera);
+            camera.name = "MainCamera";
+            DontDestroyOnLoad(camera.gameObject);
+            builder.RegisterComponent(camera);
+        }
+
+        private void BindEventSystem(IContainerBuilder builder)
+        {
+            var eventSystem = Instantiate(_eventSystem);
+            DontDestroyOnLoad(eventSystem);
+            
+            builder.RegisterComponent(_eventSystem);
         }
 
         private GlobalUICanvas BindGlobalUICanvas(IContainerBuilder builder)
@@ -59,7 +92,9 @@ namespace Game.Infrastructure.Scopes
 
         private void BindCoroutineHandler(IContainerBuilder builder)
         {
-            builder.RegisterComponentOnNewGameObject<CoroutineHandler>(Lifetime.Singleton).DontDestroyOnLoad();
+            var coroutineHandler = new GameObject("CoroutineHandler", typeof(CoroutineHandler)).GetComponent<CoroutineHandler>();
+            DontDestroyOnLoad(coroutineHandler);
+            builder.RegisterComponent(coroutineHandler);
         }
 
         private void BindEventManager(IContainerBuilder builder)
@@ -67,11 +102,10 @@ namespace Game.Infrastructure.Scopes
             builder.Register<EventManager>(Lifetime.Singleton);
         }
 
-        private void BindFadeSystem(IContainerBuilder builder, GlobalUICanvas globalUICanvas)
+        private void BindFadeSystem(IContainerBuilder builder)
         {
-            var fade = Instantiate(_fade, globalUICanvas.transform);
+            var fade = Instantiate(_fade, _globalUICanvasInstance.transform);
             fade.Init(_fadeSettings);
-            DontDestroyOnLoad(fade);
             builder.RegisterComponent(fade);
 
             builder.Register<FadeService>(Lifetime.Singleton);
@@ -84,20 +118,12 @@ namespace Game.Infrastructure.Scopes
             builder.Register<ScenePresenter>(Lifetime.Singleton);
         }
 
-        private void BindPointAndClickSystem(IContainerBuilder builder)
+        private void BindPointAndClickData(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<PlayerNavMeshAgentService>();
-            builder.Register<PointAndClickData>(Lifetime.Singleton)
+            builder.RegisterEntryPoint<PointAndClickData>()
                 .WithParameter(_maxRaycastDistance)
-                .WithParameter(_isPointAndClickBlockedOnStart);
-            builder.Register<PointAndClickService>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<PointAndClickPresenter>();
-        }
-
-        private void BindInteractableHandlerSystem(IContainerBuilder builder)
-        {
-            builder.Register<InteractableHandlingService>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<InteractableHandlingPresenter>();
+                .WithParameter(_isPointAndClickBlockedOnStartScene)
+                .AsSelf();
         }
 
         private void BindDialogueSystem(IContainerBuilder builder)
@@ -105,8 +131,6 @@ namespace Game.Infrastructure.Scopes
             builder.Register<DialogueData>(Lifetime.Singleton)
                 .WithParameter(_typeSpeed)
                 .WithParameter(_maxTypeTime);
-            builder.Register<DialogueService>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<DialoguePresenter>();
         }
 
         private void BindAudioSystem(IContainerBuilder builder)
@@ -127,6 +151,24 @@ namespace Game.Infrastructure.Scopes
             builder.Register<AudioPresenter>(Lifetime.Singleton);
             builder.Register<AudioSettingsService>(Lifetime.Singleton);
             builder.Register<AudioSettingsPresenter>(Lifetime.Singleton);
+        }
+
+        private void BindScopedLifecycleManager(IContainerBuilder builder)
+        {
+            builder.Register<ScopedLifecycleManager>(Lifetime.Singleton);
+        }
+
+        private void BindDebugInfo(IContainerBuilder builder)
+        {
+            var config = Resources.Load<DebugInfo>("DebugInfo");
+            if (config.enableLevelDebugging)
+            {
+                builder.RegisterBuildCallback(resolver =>
+                {
+                    var levelsDebug = resolver.Instantiate(_levelsDebug, _globalUICanvasInstance.transform);
+                    DontDestroyOnLoad(levelsDebug);
+                });
+            }
         }
     }
 }

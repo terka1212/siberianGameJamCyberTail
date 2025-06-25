@@ -10,9 +10,13 @@
         Bootstrap,
         Menu,
         Tutorial,
+        TutorialNew,
         Street,
+        StreetNew,
         Market,
+        MarketNew,
         Roof,
+        RoofNew,
         SampleScene,
         SampleScene2
     }

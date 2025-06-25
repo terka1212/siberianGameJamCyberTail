@@ -4,9 +4,9 @@ using UnityEngine.AI;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Navigation
+namespace Game.GameObjects
 {
-    public class PlayerNavMeshAgentService : ITickable
+    public class NavMeshAgentService : MonoBehaviour, INavMeshAgentService
     {
         private NavMeshAgent _agent;
         private EventManager _eventManager;
@@ -14,17 +14,17 @@ namespace Game.Navigation
         private bool _verifyCompletion = false;
 
         [Inject]
-        public PlayerNavMeshAgentService(EventManager eventManager,NavMeshAgent agent = null)
+        public void Construct(EventManager eventManager,NavMeshAgent agent = null)
         {
             _eventManager = eventManager;
             _agent = agent;
         }
 
-        public void Tick()
+        public void Update()
         {
             // Check if we've reached the destination
             if (!_verifyCompletion) return;
-            
+
             if (!_agent.pathPending)
             {
                 if (_agent.remainingDistance <= _agent.stoppingDistance)
@@ -53,14 +53,10 @@ namespace Game.Navigation
             return _agent != null;
         }
 
-        public bool IsSameAgent(NavMeshAgent other)
-        {
-            return other.Equals(_agent);
-        }
-
         private void DestinationReached()
         {
             _verifyCompletion = false;
+            Debug.Log("DestinationReached");
             _eventManager.InvokeOnDestinationReachedByPlayer(_agent);
         }
     }

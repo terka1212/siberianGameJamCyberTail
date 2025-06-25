@@ -1,12 +1,33 @@
+using Game.Audio;
 using Game.Data;
-using Game.SceneManagement;
-using Game.Utils;
 using UnityEngine;
+using VContainer;
 
-public class Bootstrap : MonoBehaviour
+namespace Game.SceneManagement
 {
-    void Start()
+    public class Bootstrap : MonoBehaviour
     {
-        StartCoroutine(SceneLoader.LoadScene(SceneName.Menu));
+        [SerializeField] private FadeSettings mainThemeFadeSettings;
+    
+        private AudioPresenter _audioPresenter;
+        private ScenePresenter _scenePresenter;
+
+        [Inject]
+        public void Construct(AudioPresenter audioPresenter, ScenePresenter scenePresenter)
+        {
+            _audioPresenter = audioPresenter;
+            _scenePresenter = scenePresenter;
+        }
+    
+        void Start()
+        {
+            PlayMainThemeMusic();
+            _scenePresenter.InvokeTransition(SceneName.Bootstrap, SceneName.Menu);
+        }
+
+        private void PlayMainThemeMusic()
+        {
+            _audioPresenter.PlayMusic("MainTheme", mainThemeFadeSettings);
+        }
     }
 }

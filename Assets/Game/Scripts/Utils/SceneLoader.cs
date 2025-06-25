@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Game.Data;
 using UnityEngine;
@@ -25,6 +26,11 @@ namespace Game.Utils
                 yield return null;
             } while (scene.progress < 0.9f);
             scene.allowSceneActivation = true;
+        }
+
+        public static SceneName GetCurrentSceneName()
+        {
+            return Enum.Parse<SceneName>(SceneManager.GetActiveScene().name);
         }
     }
 }
