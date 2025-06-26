@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7313312284046914497}
   - component: {fileID: 8140303377252805307}
   - component: {fileID: 5236969439711662810}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LevelJumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109074776097462660}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PossibleDestination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
