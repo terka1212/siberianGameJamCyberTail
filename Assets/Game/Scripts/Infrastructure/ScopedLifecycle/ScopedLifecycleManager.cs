@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Infrastructure
+namespace Game.Infrastructure.ScopedLifecycle
 {
-    public class ScopedLifecycleManager : MonoBehaviour, IDisposable
+    public class ScopedLifecycleManager : MonoBehaviour
     {
         private readonly List<IScopedStartable> _scopedStartables = new List<IScopedStartable>();
         private readonly List<IScopedTickable> _scopedTickables = new List<IScopedTickable>();
@@ -46,11 +45,6 @@ namespace Game.Infrastructure
             {
                 tickable.ScopedTick();
             }
-        }
-
-        public void Dispose()
-        {
-            Destroy(gameObject);
         }
     }
 }

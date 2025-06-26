@@ -1,26 +1,30 @@
-﻿using Game.Events;
+﻿using System;
+using Game.Events;
+using Game.Infrastructure.ScopedLifecycle;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.GameObjects
 {
-    public class NavMeshAgentService : MonoBehaviour, INavMeshAgentService
+    public class NavMeshAgentService : IScopedTickable, INavMeshAgentService, IDisposable
     {
         private NavMeshAgent _agent;
         private EventManager _eventManager;
+        private ScopedLifecycleManager _scopedLifecycleManager;
         
         private bool _verifyCompletion = false;
 
         [Inject]
-        public void Construct(EventManager eventManager,NavMeshAgent agent = null)
+        public void Construct(EventManager eventManager, ScopedLifecycleManager scopedLifecycleManager,NavMeshAgent agent = null)
         {
             _eventManager = eventManager;
+            _scopedLifecycleManager = scopedLifecycleManager;
+            _scopedLifecycleManager.Register(this);
             _agent = agent;
         }
 
-        public void Update()
+        public void ScopedTick()
         {
             // Check if we've reached the destination
             if (!_verifyCompletion) return;
@@ -58,6 +62,11 @@ namespace Game.GameObjects
             _verifyCompletion = false;
             Debug.Log("DestinationReached");
             _eventManager.InvokeOnDestinationReachedByPlayer(_agent);
+        }
+
+        public void Dispose()
+        {
+            _scopedLifecycleManager.Unregister(this);
         }
     }
 }

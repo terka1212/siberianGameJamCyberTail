@@ -8,11 +8,10 @@ using Game.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.Scopes
+namespace Game.Infrastructure.ScopedLifecycle.Scopes
 {
     public class RootLifetimeScope : LifetimeScope
     {
@@ -155,7 +154,9 @@ namespace Game.Infrastructure.Scopes
 
         private void BindScopedLifecycleManager(IContainerBuilder builder)
         {
-            builder.Register<ScopedLifecycleManager>(Lifetime.Singleton);
+            var scopedLifecycleManager = new GameObject("ScopedLifecycleManager", typeof(ScopedLifecycleManager)).GetComponent<ScopedLifecycleManager>();
+            DontDestroyOnLoad(scopedLifecycleManager);
+            builder.RegisterComponent(scopedLifecycleManager);
         }
 
         private void BindDebugInfo(IContainerBuilder builder)

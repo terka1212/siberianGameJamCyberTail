@@ -1,10 +1,9 @@
 ﻿using Game.Audio;
-using Game.DebugUtilities;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.Scopes
+namespace Game.Infrastructure.ScopedLifecycle.Scopes
 {
     public class SceneLifetimeScope : LifetimeScope
     {

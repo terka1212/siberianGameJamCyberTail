@@ -2,7 +2,7 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.Scopes
+namespace Game.Infrastructure.ScopedLifecycle.Scopes
 {
     public class InteractionSystemLifetimeScope : LifetimeScope
     {
@@ -15,6 +15,11 @@ namespace Game.Infrastructure.Scopes
         {
             builder.Register<InteractableHandlingService>(Lifetime.Scoped);
             builder.Register<InteractableHandlingPresenter>(Lifetime.Scoped);
+            
+            builder.RegisterBuildCallback(container =>
+            {
+                var ihPresenter = container.Resolve<InteractableHandlingPresenter>();
+            });
         }
     }
 }

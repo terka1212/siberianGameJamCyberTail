@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.Scopes
+namespace Game.Infrastructure.ScopedLifecycle.Scopes
 {
     public class NavigationLifetimeScope : LifetimeScope
     {
@@ -20,7 +20,7 @@ namespace Game.Infrastructure.Scopes
             if (agent != null)
             {
                 builder.RegisterComponent(agent);
-                builder.RegisterEntryPoint<NavMeshAgentService>().As<INavMeshAgentService>();
+                builder.Register<INavMeshAgentService, NavMeshAgentService>(Lifetime.Scoped);
             }
             else
             {
@@ -28,7 +28,12 @@ namespace Game.Infrastructure.Scopes
                 Debug.LogWarning("Null navmesh agent, register NullNavMeshAgentService");
             }
             builder.Register<PointAndClickService>(Lifetime.Scoped);
-            builder.RegisterEntryPoint<PointAndClickPresenter>();
+            builder.Register<PointAndClickPresenter>(Lifetime.Scoped);
+            
+            builder.RegisterBuildCallback(container =>
+            {
+                var pacPresenter = container.Resolve<PointAndClickPresenter>();
+            });
         }
         
     }

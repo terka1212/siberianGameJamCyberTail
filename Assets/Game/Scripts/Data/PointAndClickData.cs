@@ -1,7 +1,7 @@
 ﻿using System;
 using Game.Events;
 using Game.GameObjects;
-using Game.Infrastructure;
+using Game.Infrastructure.ScopedLifecycle;
 using UnityEngine;
 using VContainer.Unity;
 

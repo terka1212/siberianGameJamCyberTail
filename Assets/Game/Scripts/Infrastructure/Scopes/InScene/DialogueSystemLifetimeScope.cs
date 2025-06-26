@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.Scopes
+namespace Game.Infrastructure.ScopedLifecycle.Scopes
 {
     public class DialogueSystemLifetimeScope : LifetimeScope
     {
@@ -22,7 +22,7 @@ namespace Game.Infrastructure.Scopes
                 .UnderTransform(uiRectTransform);
             builder.Register<DialogueView>(Lifetime.Scoped);
             builder.Register<DialogueService>(Lifetime.Scoped);
-            builder.RegisterEntryPoint<DialoguePresenter>();
+            builder.Register<DialoguePresenter>(Lifetime.Scoped);
         }
     }
 }

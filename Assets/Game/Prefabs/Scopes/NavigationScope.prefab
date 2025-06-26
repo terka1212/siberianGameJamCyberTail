@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: Game.Infrastructure.Scopes.SceneLifetimeScope
+    TypeName: Game.Infrastructure.ScopedLifecycle.Scopes.SceneLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   agent: {fileID: 0}

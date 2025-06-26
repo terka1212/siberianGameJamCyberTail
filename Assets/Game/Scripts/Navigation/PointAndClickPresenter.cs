@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Infrastructure.ScopedLifecycle;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
@@ -6,20 +7,23 @@ using VContainer.Unity;
 
 namespace Game.GameObjects
 {
-    public class PointAndClickPresenter : MonoBehaviour, IDisposable
+    public class PointAndClickPresenter : IScopedStartable, IDisposable
     {
         private PointAndClickService _pointAndClickService;
             
         private InputAction _clickAction;
         private InputAction _mousePositionAction;
+        private ScopedLifecycleManager _scopedLifecycleManager;
 
         [Inject]
-        public PointAndClickPresenter(PointAndClickService pointAndClickService)
+        public PointAndClickPresenter(PointAndClickService pointAndClickService, ScopedLifecycleManager scopedLifecycleManager)
         {
             _pointAndClickService = pointAndClickService;
+            _scopedLifecycleManager = scopedLifecycleManager;
+            _scopedLifecycleManager.Register(this);
         }
         
-        public void Start()
+        public void ScopedStart()
         {
             _clickAction = InputSystem.actions.FindAction("Click");
             _mousePositionAction = InputSystem.actions.FindAction("CursorPosition");
@@ -37,8 +41,7 @@ namespace Game.GameObjects
         {
             _clickAction.performed -= ClickHandle;
             
-            _clickAction?.Dispose();
-            _mousePositionAction?.Dispose();
+            _scopedLifecycleManager.Unregister(this);
         }
 
         

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: Game.Infrastructure.Scopes.NavigationLifetimeScope
+    TypeName: Game.Infrastructure.ScopedLifecycle.Scopes.NavigationLifetimeScope
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 0}

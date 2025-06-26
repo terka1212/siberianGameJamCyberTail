@@ -2,6 +2,7 @@
 using Game.Data;
 using Game.Dialogues.NPC;
 using Game.Events;
+using Game.Infrastructure.ScopedLifecycle;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
@@ -9,24 +10,28 @@ using VContainer.Unity;
 
 namespace Game.Dialogues
 {
-    public class DialoguePresenter : MonoBehaviour, IDisposable
+    public class DialoguePresenter : IScopedStartable, IDisposable
     {
-        private DialogueDistributor _dialogueDistributor;
-        private DialogueService _dialogueService;
-        private EventManager _eventManager;
-        
+        private readonly DialogueDistributor _dialogueDistributor;
+        private readonly EventManager _eventManager;
+        private readonly ScopedLifecycleManager _scopedLifecycleManager;
+        private readonly DialogueService _dialogueService;
+
         private InputAction _clickAction;
-        
         private DialogueText _cachedDialogueText;
 
         [Inject]
-        public DialoguePresenter(DialogueDistributor dialogueDistributor, EventManager eventManager)
+        public DialoguePresenter(DialogueDistributor dialogueDistributor, EventManager eventManager,
+            ScopedLifecycleManager scopedLifecycleManager, DialogueService dialogueService)
         {
             _dialogueDistributor = dialogueDistributor;
             _eventManager = eventManager;
+            _scopedLifecycleManager = scopedLifecycleManager;
+            _scopedLifecycleManager.Register(this);
+            _dialogueService = dialogueService;
         }
-        
-        public void Start()
+
+        public void ScopedStart()
         {
             _clickAction = InputSystem.actions.FindAction("Click");
             _eventManager.OnEndDialogue += ClearCash;
@@ -37,6 +42,7 @@ namespace Game.Dialogues
         {
             _eventManager.OnEndDialogue -= ClearCash;
             _clickAction.performed -= TrySkipOrNextParagraph;
+            _scopedLifecycleManager.Unregister(this);
         }
 
         public void StartDialogue(long npcId)
@@ -50,7 +56,7 @@ namespace Game.Dialogues
             if (!_dialogueService.IsInDialog()) return;
             _dialogueService.DisplayNextParagraph(_cachedDialogueText);
         }
-        
+
         private void ClearCash()
         {
             _cachedDialogueText = null;
