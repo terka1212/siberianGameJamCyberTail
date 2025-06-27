@@ -1,4 +1,4 @@
-﻿namespace Game.Infrastructure.ScopedLifecycle
+﻿namespace Game.Infrastructure
 {
     public interface IBlockable
     {

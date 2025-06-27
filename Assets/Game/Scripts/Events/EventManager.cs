@@ -4,17 +4,12 @@ using UnityEngine.AI;
 
 namespace Game.Events
 {
-    //TODO refactor to EventBus
     public class EventManager
     {
-        //TODO удалить 4 строки ниже
+        //TODO удалить 2 строки ниже
         public static event Action InventoryChange;
 
-        public static event Action StartSceneLoading;
-
         public static void InvokeInventoryChangeEvent() => InventoryChange?.Invoke();
-
-        public static void InvokeStartSceneLoading() => StartSceneLoading?.Invoke();
 
         //Point&Click Events
         public event Action OnPointAndClickBlocked;

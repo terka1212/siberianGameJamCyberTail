@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Game.Data;
 using Game.Events;
-using Game.GameObjects;
 using Game.Utils;
 using VContainer;
 

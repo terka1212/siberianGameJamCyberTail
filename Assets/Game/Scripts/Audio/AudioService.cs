@@ -6,7 +6,6 @@ using Game.Utils;
 using Game.Validation;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.Audio
 {

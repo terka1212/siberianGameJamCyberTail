@@ -24,7 +24,6 @@ namespace Game.GameObjects
 
         public void HandleClick(Vector2 mousePosition)
         {
-            Debug.Log("HandleClick");
             if (!ValidateClick()) return;
             var ray = Camera.main.ScreenPointToRay(mousePosition);
 

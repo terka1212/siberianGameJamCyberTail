@@ -1,4 +1,4 @@
-﻿namespace Game.Infrastructure.ScopedLifecycle
+﻿namespace Game.Infrastructure
 {
     /// <summary>
     /// You need to Register object, that uses this interface, in ScopedLifecycleManager

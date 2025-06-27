@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.Events;
-using Game.Infrastructure.ScopedLifecycle;
+using Game.Infrastructure;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -60,7 +60,6 @@ namespace Game.GameObjects
         private void DestinationReached()
         {
             _verifyCompletion = false;
-            Debug.Log("DestinationReached");
             _eventManager.InvokeOnDestinationReachedByPlayer(_agent);
         }
 

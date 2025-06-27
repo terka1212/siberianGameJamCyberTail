@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Infrastructure.ScopedLifecycle
+namespace Game.Infrastructure
 {
     public class ScopedLifecycleManager : MonoBehaviour
     {

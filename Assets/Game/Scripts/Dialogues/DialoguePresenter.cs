@@ -1,12 +1,9 @@
 ﻿using System;
 using Game.Data;
-using Game.Dialogues.NPC;
 using Game.Events;
-using Game.Infrastructure.ScopedLifecycle;
-using UnityEngine;
+using Game.Infrastructure;
 using UnityEngine.InputSystem;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.Dialogues
 {

@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.ScopedLifecycle.Scopes
+namespace Game.Infrastructure.Scopes
 {
     public class RootLifetimeScope : LifetimeScope
     {
@@ -63,6 +63,8 @@ namespace Game.Infrastructure.ScopedLifecycle.Scopes
             BindAudioSystem(builder);
             BindScopedLifecycleManager(builder);
             BindDebugInfo(builder);
+            
+            Debug.Log("RootLifetimeScope: Configuration - Completed!");
         }
 
         private void BindCamera(IContainerBuilder builder)

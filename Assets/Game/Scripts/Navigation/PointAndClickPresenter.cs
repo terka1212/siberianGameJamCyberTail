@@ -1,9 +1,8 @@
 ﻿using System;
-using Game.Infrastructure.ScopedLifecycle;
+using Game.Infrastructure;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.GameObjects
 {

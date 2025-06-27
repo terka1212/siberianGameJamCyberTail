@@ -18,6 +18,5 @@
         Roof,
         RoofNew,
         SampleScene,
-        SampleScene2
     }
 }

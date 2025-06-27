@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using Game.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
 
 namespace Game.UI
 {

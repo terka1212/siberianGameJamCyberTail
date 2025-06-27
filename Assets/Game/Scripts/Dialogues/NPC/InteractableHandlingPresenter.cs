@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.Events;
-using Game.Infrastructure.ScopedLifecycle;
+using Game.Infrastructure;
 using VContainer;
 
 namespace Game.Dialogues.NPC

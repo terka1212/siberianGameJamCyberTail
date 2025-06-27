@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Infrastructure.ScopedLifecycle.Scopes
+namespace Game.Infrastructure.Scopes
 {
     public class DialogueSystemLifetimeScope : LifetimeScope
     {
